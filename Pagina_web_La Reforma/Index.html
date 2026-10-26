@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Municipio de La Reforma, Oaxaca - Portal Oficial e Histórico</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        oaxaca: {
+                            cochinilla: '#7C1C2D',
+                            cochinillaDark: '#54101C',
+                            gold: '#D4AF37',
+                            goldHover: '#B59226',
+                            cempasuchil: '#E76F51',
+                            amberDark: '#D97706',
+                            sierra: '#1B4332',
+                            turquesa: '#006D77',
+                            crema: '#FFFDF9',
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['Playfair Display', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Patrón de Grecas Mixtecas */
+        .grecas-pattern {
+            background-color: #7C1C2D;
+            background-image: radial-gradient(#D4AF37 0.75px, transparent 0.75px), radial-gradient(#D4AF37 0.75px, #7C1C2D 0.75px);
+            background-size: 30px 30px;
+            background-position: 0 0, 15px 15px;
+        }
+
+        .grecas-border {
+            background: repeating-linear-gradient(
+                45deg,
+                #D4AF37,
+                #D4AF37 10px,
+                #7C1C2D 10px,
+                #7C1C2D 20px,
+                #E76F51 20px,
+                #E76F51 30px,
+                #006D77 30px,
+                #006D77 40px
+            );
+            height: 6px;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        /* Modal backdrop animation */
+        .modal-fade {
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F1F5F9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #7C1C2D;
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #54101C;
+        }
+    </style>
+</head>
+<body class="bg-oaxaca-crema text-slate-800 antialiased selection:bg-oaxaca-gold selection:text-white flex flex-col min-h-screen">
+
+    <!-- Borde Artístico de Grecas -->
+    <div class="grecas-border sticky top-0 z-50"></div>
+
+    <!-- Navegación Sticky -->
+    <nav class="bg-oaxaca-cochinilla text-white sticky top-[6px] z-40 shadow-xl border-b border-oaxaca-gold/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- LOGO Y TÍTULO -->
+                <a href="#inicio" class="flex items-center space-x-3 group">
+                    <div class="w-12 h-12 rounded-full bg-gradient-to-tr from-oaxaca-gold to-amber-300 flex items-center justify-center font-bold text-xl text-oaxaca-cochinilla shadow-lg group-hover:scale-105 transition-transform border-2 border-white">
+                        LR
+                    </div>
+                    <div>
+                        <span class="font-serif font-bold text-xl tracking-wide block leading-tight text-amber-100 group-hover:text-oaxaca-gold transition-colors">La Reforma</span>
+                        <span class="text-[10px] sm:text-xs text-amber-300/90 tracking-widest uppercase font-semibold block">Distrito de Putla, Oaxaca</span>
+                    </div>
+                </a>
+
+                <!-- MENÚ DESKTOP -->
+                <div class="hidden lg:flex items-center space-x-1 xl:space-x-2 text-xs xl:text-sm font-semibold">
+                    <a href="#inicio" class="px-3 py-2 rounded-lg hover:bg-white/10 hover:text-oaxaca-gold transition">Inicio</a>
+                    <a href="#historia" class="px-3 py-2 rounded-lg hover:bg-white/10 hover:text-oaxaca-gold transition">Historia y Orígenes</a>
+                    <a href="#territorio" class="px-3 py-2 rounded-lg hover:bg-white/10 hover:text-oaxaca-gold transition">Comunidades</a>
+                    <a href="#gobierno" class="px-3 py-2 rounded-lg hover:bg-white/10 hover:text-oaxaca-gold transition">Usos y Costumbres</a>
+                    <a href="#cultura" class="px-3 py-2 rounded-lg hover:bg-white/10 hover:text-oaxaca-gold transition">Cultura y Carnaval</a>
+                    <a href="#festividades" class="px-3 py-2 rounded-lg hover:bg-white/10 hover:text-oaxaca-gold transition">Festividades</a>
+                    <a href="#desarrollo" class="px-3 py-2 rounded-lg hover:bg-white/10 hover:text-oaxaca-gold transition">Educación y Salud</a>
+                </div>
+
+                <!-- MENÚ MÓVIL (BOTÓN) -->
+                <div class="lg:hidden">
+                    <button id="mobile-menu-btn" type="button" class="p-2.5 rounded-lg text-amber-200 hover:text-white hover:bg-white/10 focus:outline-none" aria-label="Abrir Menú">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- MENÚ MÓVIL DESPLEGABLE -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-oaxaca-cochinillaDark border-t border-oaxaca-gold/20 px-4 pt-3 pb-6 space-y-2 text-sm font-medium shadow-2xl">
+            <a href="#inicio" class="block px-3 py-2.5 rounded-lg text-amber-100 hover:bg-oaxaca-gold hover:text-slate-900 transition">Inicio</a>
+            <a href="#historia" class="block px-3 py-2.5 rounded-lg text-amber-100 hover:bg-oaxaca-gold hover:text-slate-900 transition">Historia y Códices</a>
+            <a href="#territorio" class="block px-3 py-2.5 rounded-lg text-amber-100 hover:bg-oaxaca-gold hover:text-slate-900 transition">Agencias y Localidades</a>
+            <a href="#gobierno" class="block px-3 py-2.5 rounded-lg text-amber-100 hover:bg-oaxaca-gold hover:text-slate-900 transition">Gobierno Comunitario</a>
+            <a href="#cultura" class="block px-3 py-2.5 rounded-lg text-amber-100 hover:bg-oaxaca-gold hover:text-slate-900 transition">Música, Danza y Gastronomía</a>
+            <a href="#festividades" class="block px-3 py-2.5 rounded-lg text-amber-100 hover:bg-oaxaca-gold hover:text-slate-900 transition">Calendario de Fiestas</a>
+            <a href="#desarrollo" class="block px-3 py-2.5 rounded-lg text-amber-100 hover:bg-oaxaca-gold hover:text-slate-900 transition">Educación y Salud</a>
+        </div>
+    </nav>
+
+    <!-- HERO BANNER DINÁMICO CON COLORES VIBRANTES -->
+    <header id="inicio" class="relative overflow-hidden bg-gradient-to-br from-oaxaca-cochinilla via-rose-950 to-oaxaca-sierra text-white py-20 lg:py-28 px-4">
+        <!-- Adorno de Fondo de Grecas -->
+        <div class="absolute inset-0 opacity-10 grecas-pattern pointer-events-none"></div>
+        <div class="absolute -right-20 -bottom-20 w-96 h-96 bg-oaxaca-gold/20 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute -left-20 -top-20 w-96 h-96 bg-oaxaca-cempasuchil/20 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-6xl mx-auto relative z-10 text-center space-y-8">
+            <div class="inline-flex items-center gap-2 bg-oaxaca-gold/20 backdrop-blur-md border border-oaxaca-gold/40 text-amber-300 text-xs sm:text-sm font-semibold px-5 py-2 rounded-full shadow-lg">
+                <i class="fa-solid fa-certificate text-oaxaca-gold"></i>
+                <span>Sistemas Normativos Internos (Usos y Costumbres)</span>
+            </div>
+
+            <h1 class="font-serif text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-amber-50 leading-tight drop-shadow-md">
+                Municipio de <span class="text-transparent bg-clip-text bg-gradient-to-r from-oaxaca-gold via-amber-200 to-amber-400">La Reforma</span>, Oaxaca
+            </h1>
+
+            <p class="text-base sm:text-xl text-rose-100/90 max-w-3xl mx-auto font-light leading-relaxed">
+                Tierra con raíces milenarias en el antiguo reino mixteco de Tututepec, forjada por la fuerza del <strong class="text-oaxaca-gold font-semibold">Tequio</strong>, la alegría de la <strong class="text-oaxaca-gold font-semibold">Música de Viento</strong> y la sabiduría de la <strong class="text-oaxaca-gold font-semibold">Asamblea Comunitaria</strong>.
+            </p>
+
+            <!-- Botones de Acción -->
+            <div class="pt-4 flex flex-wrap justify-center gap-4">
+                <a href="#historia" class="bg-gradient-to-r from-oaxaca-gold to-amber-500 hover:from-amber-500 hover:to-oaxaca-gold text-slate-950 font-bold px-8 py-3.5 rounded-xl shadow-xl hover:shadow-2xl hover:-translate-y-0.5 transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-scroll"></i> Explorar Historia y Códices
+                </a>
+                <a href="#territorio" class="bg-white/10 hover:bg-white/20 text-white font-semibold px-8 py-3.5 rounded-xl border border-white/30 backdrop-blur-md shadow-lg hover:-translate-y-0.5 transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-map-marked-alt"></i> Ver Comunidades
+                </a>
+            </div>
+
+            <!-- Datos Contadores Rápidos -->
+            <div class="pt-10 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-5xl mx-auto">
+                <div class="bg-white/10 backdrop-blur-md border border-white/15 p-4 rounded-2xl text-center shadow-lg hover:border-oaxaca-gold transition">
+                    <div class="text-amber-400 text-2xl font-bold font-serif">3,500+</div>
+                    <div class="text-xs text-rose-100/80 font-medium">Habitantes en la Región</div>
+                </div>
+                <div class="bg-white/10 backdrop-blur-md border border-white/15 p-4 rounded-2xl text-center shadow-lg hover:border-oaxaca-gold transition">
+                    <div class="text-amber-400 text-2xl font-bold font-serif">804 msnm</div>
+                    <div class="text-xs text-rose-100/80 font-medium">Altitud Promedio Cabecera</div>
+                </div>
+                <div class="bg-white/10 backdrop-blur-md border border-white/15 p-4 rounded-2xl text-center shadow-lg hover:border-oaxaca-gold transition">
+                    <div class="text-amber-400 text-2xl font-bold font-serif">496.3 km²</div>
+                    <div class="text-xs text-rose-100/80 font-medium">Superficie Territorial</div>
+                </div>
+                <div class="bg-white/10 backdrop-blur-md border border-white/15 p-4 rounded-2xl text-center shadow-lg hover:border-oaxaca-gold transition">
+                    <div class="text-amber-400 text-2xl font-bold font-serif">4 Agencias</div>
+                    <div class="text-xs text-rose-100/80 font-medium">Y Múltiples Colonias</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- SECCIÓN 1: HISTORIA, CÓDICES Y GEOGRAFÍA -->
+    <section id="historia" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <span class="text-oaxaca-cochinilla text-xs font-bold uppercase tracking-widest bg-rose-100 px-4 py-1.5 rounded-full border border-rose-200">
+                Patrimonio Histórico e Identidad
+            </span>
+            <h2 class="font-serif text-3xl sm:text-5xl font-bold text-slate-900 mt-3">
+                Orígenes Prehispánicos y Geografía
+            </h2>
+            <p class="text-slate-600 max-w-2xl mx-auto mt-3 text-sm sm:text-base">
+                Investigaciones documentadas por Manuel Martínez Gracida, códices mixtecos e historiografía local.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+            <!-- El Antiguo El Zapote -->
+            <div class="bg-white p-8 rounded-3xl shadow-xl border border-amber-100 space-y-6 relative overflow-hidden group hover:shadow-2xl transition">
+                <div class="w-14 h-14 rounded-2xl bg-oaxaca-cochinilla text-oaxaca-gold flex items-center justify-center text-2xl shadow-lg">
+                    <i class="fa-solid fa-feather-pointed"></i>
+                </div>
+                <h3 class="font-serif text-2xl sm:text-3xl font-bold text-oaxaca-cochinilla">
+                    El Antiguo "El Zapote" y el Señorío Mixteco
+                </h3>
+                <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+                    En la antigüedad, las tierras de La Reforma eran conocidas con el nombre mixteco de <strong>El Zapote</strong>. Su origen y expansión estuvieron ligados directamente al poderío del <strong>Reino de Tututepec</strong> y la impronta defensiva del histórico Señor <em>8 Venado "Garra de Jaguar"</em>.
+                </p>
+                <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+                    Testimonio de este cruce de caminos hacia la Costa son los múltiples hallazgos arqueológicos: piedras de sacrificio, ídolos de piedra labrada, vasijas y artefactos ceremoniales que forman parte del legado del Museo Comunitario.
+                </p>
+                <div class="bg-amber-50/80 p-4 rounded-2xl border border-amber-200 flex items-center gap-4">
+                    <i class="fa-solid fa-landmark-dome text-3xl text-oaxaca-gold"></i>
+                    <p class="text-xs text-amber-900">
+                        <strong>Arqueología Local:</strong> Vestigios preservados con devoción comunitaria para transmitir la grandeza mixteca a las futuras generaciones.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Orografía e Hidrografía -->
+            <div class="bg-white p-8 rounded-3xl shadow-xl border border-amber-100 space-y-6 flex flex-col justify-between hover:shadow-2xl transition">
+                <div class="space-y-6">
+                    <div class="w-14 h-14 rounded-2xl bg-oaxaca-turquesa text-white flex items-center justify-center text-2xl shadow-lg">
+                        <i class="fa-solid fa-mountain-sun"></i>
+                    </div>
+                    <h3 class="font-serif text-2xl sm:text-3xl font-bold text-oaxaca-turquesa">
+                        Orografía e Hidrografía Sagrada
+                    </h3>
+                    <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+                        Enclavado entre cerros guardianes como el imponente <strong>Cerro de la Campana</strong> (2050 msnm), el <strong>Cerro San Marcos</strong> y la <strong>Cumbre de Leche (La Chinche)</strong>, el municipio goza de un microclima fértil.
+                    </p>
+                    <div class="space-y-3">
+                        <h4 class="font-bold text-slate-800 text-sm uppercase tracking-wider flex items-center gap-2">
+                            <i class="fa-solid fa-water text-oaxaca-turquesa"></i> Ríos y Afluentes Principales:
+                        </h4>
+                        <div class="flex flex-wrap gap-2 text-xs font-semibold">
+                            <span class="bg-teal-50 text-teal-800 px-3 py-1.5 rounded-lg border border-teal-200">Río Grande (Yutacanú)</span>
+                            <span class="bg-teal-50 text-teal-800 px-3 py-1.5 rounded-lg border border-teal-200">Río Tigre</span>
+                            <span class="bg-teal-50 text-teal-800 px-3 py-1.5 rounded-lg border border-teal-200">Río Hierba Santa</span>
+                            <span class="bg-teal-50 text-teal-800 px-3 py-1.5 rounded-lg border border-teal-200">Río Pinotepa</span>
+                            <span class="bg-teal-50 text-teal-800 px-3 py-1.5 rounded-lg border border-teal-200">Agua Fría</span>
+                            <span class="bg-teal-50 text-teal-800 px-3 py-1.5 rounded-lg border border-teal-200">Naranjito & Conejo</span>
+                            <span class="bg-teal-50 text-teal-800 px-3 py-1.5 rounded-lg border border-teal-200">Cascadas del Chorro</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pt-4 border-t border-slate-100">
+                    <p class="text-xs text-slate-500">
+                        <strong>Límites territoriales:</strong> Colinda al Norte con Santa María Zacatepec y San Andrés Cabecera Nueva; al Sur con San Pedro Atoyac, San Juan Colorado y Santiago Ixtayutla; al Oriente con Santa Cruz Itundujia y al Poniente con Santa María Ipalapa.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 2: DIVISION TERRITORIAL INTERACTIVA -->
+    <section id="territorio" class="py-20 bg-slate-100/80 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <span class="text-oaxaca-sierra text-xs font-bold uppercase tracking-widest bg-emerald-100 px-4 py-1.5 rounded-full border border-emerald-200">
+                    Estructura Política e Identidad
+                </span>
+                <h2 class="font-serif text-3xl sm:text-5xl font-bold text-slate-900 mt-3">
+                    Agencias, Barrios y Localidades
+                </h2>
+                <p class="text-slate-600 max-w-2xl mx-auto mt-3 text-sm sm:text-base">
+                    Haz clic o filtra para conocer las historias, fiestas patronales y orígenes de cada comunidad.
+                </p>
+
+                <!-- BUSCADOR / FILTRO -->
+                <div class="mt-8 max-w-md mx-auto relative">
+                    <input type="text" id="community-search" placeholder="Buscar comunidad (ej. Estanzuela, Porvenir, Tres Reyes)..." class="w-full pl-11 pr-4 py-3 rounded-2xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-oaxaca-gold focus:border-transparent text-sm shadow-sm bg-white">
+                    <i class="fa-solid fa-search absolute left-4 top-3.5 text-slate-400"></i>
+                </div>
+            </div>
+
+            <!-- TARJETAS DE LOCALIDADES -->
+            <div id="communities-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Estanzuela Grande -->
+                <div class="community-card bg-white p-6 rounded-3xl shadow-md border border-slate-200 hover:border-oaxaca-gold hover:shadow-xl transition-all space-y-4">
+                    <div class="flex items-center justify-between">
+                        <span class="bg-rose-100 text-rose-800 text-xs font-bold px-3 py-1 rounded-full uppercase">Agencia Municipal</span>
+                        <i class="fa-solid fa-house-chimney-window text-rose-700"></i>
+                    </div>
+                    <h3 class="font-serif text-xl font-bold text-slate-800">Estanzuela Grande</h3>
+                    <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                        Asentamiento mixteco histórico de gran arraigo. Antiguamente predio de la hacienda <em>"La Esperanza"</em>. Famoso por su tradicional Día de Plaza y su centenaria fiesta patronal a San José.
+                    </p>
+                    <button onclick="openModal('modal-estanzuela')" class="text-oaxaca-cochinilla text-xs font-bold hover:underline flex items-center gap-1">
+                        Saber más e historia <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+
+                <!-- El Porvenir -->
+                <div class="community-card bg-white p-6 rounded-3xl shadow-md border border-slate-200 hover:border-oaxaca-gold hover:shadow-xl transition-all space-y-4">
+                    <div class="flex items-center justify-between">
+                        <span class="bg-amber-100 text-amber-800 text-xs font-bold px-3 py-1 rounded-full uppercase">Agencia de Policía</span>
+                        <i class="fa-solid fa-mountain text-amber-700"></i>
+                    </div>
+                    <h3 class="font-serif text-xl font-bold text-slate-800">El Porvenir</h3>
+                    <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                        Conocido originariamente como <em>La Campana</em> (reubicado en 1945). Tierra fértil destacada por su producción de café de altura, apicultura de miel pura y veneración a la Virgen de Juquila.
+                    </p>
+                    <button onclick="openModal('modal-porvenir')" class="text-oaxaca-cochinilla text-xs font-bold hover:underline flex items-center gap-1">
+                        Saber más e historia <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+
+                <!-- Río Tigre -->
+                <div class="community-card bg-white p-6 rounded-3xl shadow-md border border-slate-200 hover:border-oaxaca-gold hover:shadow-xl transition-all space-y-4">
+                    <div class="flex items-center justify-between">
+                        <span class="bg-amber-100 text-amber-800 text-xs font-bold px-3 py-1 rounded-full uppercase">Agencia de Policía</span>
+                        <i class="fa-solid fa-paw text-amber-700"></i>
+                    </div>
+                    <h3 class="font-serif text-xl font-bold text-slate-800">Río Tigre</h3>
+                    <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                        Surgido en el Ejido de Estanzuela (antiguo <em>El Acahual</em>). Su nombre evoca una misteriosa piedra tallada con la huella de una garra de tigre en el río. Fiesta a la Virgen de Guadalupe.
+                    </p>
+                    <button onclick="openModal('modal-riotigre')" class="text-oaxaca-cochinilla text-xs font-bold hover:underline flex items-center gap-1">
+                        Saber más e historia <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+
+                <!-- La Nueva Esperanza -->
+                <div class="community-card bg-white p-6 rounded-3xl shadow-md border border-slate-200 hover:border-oaxaca-gold hover:shadow-xl transition-all space-y-4">
+                    <div class="flex items-center justify-between">
+                        <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-1 rounded-full uppercase">Núcleo Rural</span>
+                        <i class="fa-solid fa-water-fall text-emerald-700"></i>
+                    </div>
+                    <h3 class="font-serif text-xl font-bold text-slate-800">La Nueva Esperanza</h3>
+                    <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                        Conocido anteriormente como <em>El Chorro</em> debido a sus espectaculares cascadas de agua cristalina. Comunidad de cafeticultores ejemplares que combaten la roya mediante el tequio.
+                    </p>
+                    <button onclick="openModal('modal-esperanza')" class="text-oaxaca-cochinilla text-xs font-bold hover:underline flex items-center gap-1">
+                        Saber más e historia <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+
+                <!-- Colonia Tres Reyes -->
+                <div class="community-card bg-white p-6 rounded-3xl shadow-md border border-slate-200 hover:border-oaxaca-gold hover:shadow-xl transition-all space-y-4">
+                    <div class="flex items-center justify-between">
+                        <span class="bg-blue-100 text-blue-800 text-xs font-bold px-3 py-1 rounded-full uppercase">Colonia Histórica</span>
+                        <i class="fa-solid fa-plane-departure text-blue-700"></i>
+                    </div>
+                    <h3 class="font-serif text-xl font-bold text-slate-800">Tres Reyes</h3>
+                    <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                        En sus terrenos operó el histórico <strong>Campo de Aviación</strong> en la década de 1950, clave para la comunicación aérea. Celebran con fervor a los Reyes Magos el 6 de enero.
+                    </p>
+                    <button onclick="openModal('modal-tresreyes')" class="text-oaxaca-cochinilla text-xs font-bold hover:underline flex items-center gap-1">
+                        Saber más e historia <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+
+                <!-- Emiliano Zapata y Barrios -->
+                <div class="community-card bg-white p-6 rounded-3xl shadow-md border border-slate-200 hover:border-oaxaca-gold hover:shadow-xl transition-all space-y-4">
+                    <div class="flex items-center justify-between">
+                        <span class="bg-purple-100 text-purple-800 text-xs font-bold px-3 py-1 rounded-full uppercase">Barrios y Colonias</span>
+                        <i class="fa-solid fa-whiskey-glass text-purple-700"></i>
+                    </div>
+                    <h3 class="font-serif text-xl font-bold text-slate-800">Emiliano Zapata y San Miguel</h3>
+                    <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                        Antes <em>Río Leche Chiquito</em>. Cuna de los antiguos trapiches donde Don Melquiades Pérez fabricaba la afamada panela y el aguardiente "La Fábrica". Capilla de la Virgen de la Candelaria.
+                    </p>
+                    <button onclick="openModal('modal-zapata')" class="text-oaxaca-cochinilla text-xs font-bold hover:underline flex items-center gap-1">
+                        Saber más e historia <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 3: GOBIERNO COMUNITARIO Y USOS Y COSTUMBRES -->
+    <section id="gobierno" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <span class="text-oaxaca-cochinilla text-xs font-bold uppercase tracking-widest bg-amber-100 px-4 py-1.5 rounded-full border border-amber-200">
+                Gobernanza Tradicional
+            </span>
+            <h2 class="font-serif text-3xl sm:text-5xl font-bold text-slate-900 mt-3">
+                Sistemas Normativos Internos y Tequio
+            </h2>
+            <p class="text-slate-600 max-w-2xl mx-auto mt-3 text-sm sm:text-base">
+                El Municipio de La Reforma se gobierna democráticamente mediante el consenso comunitario.
+            </p>
+        </div>
+
+        <!-- ESQUEMA ORGANIZACIONAL -->
+        <div class="bg-gradient-to-br from-slate-900 via-rose-950 to-slate-900 text-white p-8 sm:p-12 rounded-3xl shadow-2xl space-y-10 border border-oaxaca-gold/30">
+            <!-- Nivel Superior: Asamblea -->
+            <div class="text-center space-y-3 max-w-2xl mx-auto">
+                <div class="inline-block bg-oaxaca-gold text-slate-950 font-bold px-6 py-2 rounded-2xl text-xs sm:text-sm uppercase tracking-wider shadow-lg">
+                    Máxima Autoridad Comunal
+                </div>
+                <h3 class="font-serif text-2xl sm:text-4xl font-bold text-amber-200">ASAMBLEA GENERAL COMUNITARIA</h3>
+                <p class="text-xs sm:text-sm text-rose-100/80">
+                    Espacio donde mujeres y hombres del pueblo deliberan, eligen autoridades cada tres años y aprueban las decisiones fundamentales del municipio.
+                </p>
+            </div>
+
+            <!-- Dos Pilares de Mando -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white/10 backdrop-blur-md p-6 rounded-2xl border border-white/10 space-y-3">
+                    <h4 class="font-bold text-amber-300 text-lg flex items-center gap-2">
+                        <i class="fa-solid fa-building-columns"></i> Autoridad Municipal (Cabildo)
+                    </h4>
+                    <ul class="text-xs sm:text-sm text-slate-200 space-y-2">
+                        <li>• Presidente Municipal y Síndico Municipal</li>
+                        <li>• 4 Regidores propietarios y 4 suplentes</li>
+                        <li>• Tesorero, Secretario y Alcalde Constitucional</li>
+                        <li>• Comandante de Policía, Agentes y Representantes</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white/10 backdrop-blur-md p-6 rounded-2xl border border-white/10 space-y-3">
+                    <h4 class="font-bold text-amber-300 text-lg flex items-center gap-2">
+                        <i class="fa-solid fa-tree"></i> Bienes Ejidales y Comunales
+                    </h4>
+                    <ul class="text-xs sm:text-sm text-slate-200 space-y-2">
+                        <li>• Comisariado de Bienes Comunales y Consejo de Vigilancia</li>
+                        <li>• Protección y delimitación del territorio ancestral</li>
+                        <li>• Brigadas comunitarias cortafuego contra incendios</li>
+                        <li>• Comités de Obras Públicas, Agua Potable y Escuelas</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- TRES PILARES SOCIALES -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6 border-t border-white/10">
+                <div class="bg-amber-500/10 p-4 rounded-xl border border-amber-500/20 text-center">
+                    <i class="fa-solid fa-hands-holding-circle text-2xl text-amber-400 mb-2"></i>
+                    <h5 class="font-bold text-amber-200 text-sm">El Tequio</h5>
+                    <p class="text-[11px] text-slate-300 mt-1">Trabajo colectivo obligatorio e incondicional para el mantenimiento de caminos y escuelas.</p>
+                </div>
+                <div class="bg-amber-500/10 p-4 rounded-xl border border-amber-500/20 text-center">
+                    <i class="fa-solid fa-people-arrows text-2xl text-amber-400 mb-2"></i>
+                    <h5 class="font-bold text-amber-200 text-sm">La Guelaguetza Interna</h5>
+                    <p class="text-[11px] text-slate-300 mt-1">Intercambio de insumos, víveres y ayuda mutua en patronales, bodas y velorios.</p>
+                </div>
+                <div class="bg-amber-500/10 p-4 rounded-xl border border-amber-500/20 text-center">
+                    <i class="fa-solid fa-stairs text-2xl text-amber-400 mb-2"></i>
+                    <h5 class="font-bold text-amber-200 text-sm">Escalafón de Cargos</h5>
+                    <p class="text-[11px] text-slate-300 mt-1">Servicio comunitario progresivo donde el prestigio se gana sirviendo al pueblo.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 4: CULTURA, CARNAVAL, MÚSICA Y GASTRONOMÍA -->
+    <section id="cultura" class="py-20 bg-slate-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="text-oaxaca-cempasuchil text-xs font-bold uppercase tracking-widest bg-orange-100 px-4 py-1.5 rounded-full border border-orange-200">
+                    Tradición Viva
+                </span>
+                <h2 class="font-serif text-3xl sm:text-5xl font-bold text-slate-900 mt-3">
+                    Carnaval, Tejorones, Música y Gastronomía
+                </h2>
+                <p class="text-slate-600 max-w-2xl mx-auto mt-3 text-sm sm:text-base">
+                    Expresiones folklóricas y gastronómicas transmitidas con orgullo de generación en generación.
+                </p>
+            </div>
+
+            <!-- TABS INTERACTIVOS DE CULTURA -->
+            <div class="flex justify-center gap-2 mb-10 overflow-x-auto pb-2">
+                <button onclick="switchTab('tab-carnaval')" id="btn-tab-carnaval" class="tab-btn active bg-oaxaca-cochinilla text-white font-semibold px-6 py-2.5 rounded-2xl text-xs sm:text-sm shadow-md transition">
+                    <i class="fa-solid fa-masks-theater mr-1"></i> Carnaval y Tejorones
+                </button>
+                <button onclick="switchTab('tab-musica')" id="btn-tab-musica" class="tab-btn bg-white text-slate-700 hover:bg-slate-200 font-semibold px-6 py-2.5 rounded-2xl text-xs sm:text-sm shadow-md transition">
+                    <i class="fa-solid fa-music mr-1"></i> Música y Bandas de Viento
+                </button>
+                <button onclick="switchTab('tab-comida')" id="btn-tab-comida" class="tab-btn bg-white text-slate-700 hover:bg-slate-200 font-semibold px-6 py-2.5 rounded-2xl text-xs sm:text-sm shadow-md transition">
+                    <i class="fa-solid fa-utensils mr-1"></i> Gastronomía e Indumentaria
+                </button>
+            </div>
+
+            <!-- CONTENIDO DE TAB 1: CARNAVAL -->
+            <div id="tab-carnaval" class="tab-content bg-white p-8 sm:p-12 rounded-3xl shadow-xl border border-slate-200 space-y-6">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                    <div class="space-y-4">
+                        <h3 class="font-serif text-2xl sm:text-3xl font-bold text-oaxaca-cochinilla">
+                            La Danza de los Tejorones y el Carnaval
+                        </h3>
+                        <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+                            Nacido en la etapa posrevolucionaria, el carnaval de La Reforma es una fiesta llena de colorido, sátira y devoción. Los danzantes visten máscaras de madera labrada a mano por artesanos locales.
+                        </p>
+                        <div class="bg-rose-50 p-4 rounded-2xl border border-rose-100">
+                            <h4 class="font-bold text-rose-900 text-sm mb-2">Personajes Íconos del Carnaval:</h4>
+                            <ul class="text-xs sm:text-sm text-slate-700 space-y-1">
+                                <li>• <strong>El Ranchero y el Toro:</strong> Simbolizan las faenas del campo y la bravura.</li>
+                                <li>• <strong>El Cazador y el Oso:</strong> Representan la valentía de la cacería de montaña.</li>
+                                <li>• <strong>La Muerte:</strong> Personaje místico de respeto y picardía.</li>
+                                <li>• <strong>Los Diablos de la Costa:</strong> Tradición introducida por Don Leonor García.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="bg-gradient-to-br from-amber-500 to-rose-700 p-8 rounded-3xl text-white shadow-xl space-y-4">
+                        <i class="fa-solid fa-quote-left text-4xl text-amber-200/50"></i>
+                        <p class="font-serif italic text-lg sm:text-xl">
+                            "Al sonar del tambor y la chirimía, las comparsas recorren los barrios contagiando de alegría a todo el pueblo de La Reforma."
+                        </p>
+                        <p class="text-xs font-semibold text-amber-200 uppercase tracking-widest">— Memoria Oral Comunitaria</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CONTENIDO DE TAB 2: MÚSICA -->
+            <div id="tab-musica" class="tab-content hidden bg-white p-8 sm:p-12 rounded-3xl shadow-xl border border-slate-200 space-y-6">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                    <div class="space-y-4">
+                        <h3 class="font-serif text-2xl sm:text-3xl font-bold text-oaxaca-gold hover:text-amber-600 transition">
+                            Tradición Musical y Banda "San Isidro"
+                        </h3>
+                        <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+                            Desde los primeros arrieros que interpretaban música con tríos de guitarra, bajo y flauta, La Reforma ha sido cuna de grandes filarmónicos.
+                        </p>
+                        <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+                            En el año 2006 se consolidó la **Banda Musical "San Isidro"**, integrada por niños y jóvenes que representaron dignamente al municipio en el *Encuentro Estatal de Bandas de Música de los Pueblos Indígenas* en la ciudad de Oaxaca en 2012.
+                        </p>
+                    </div>
+                    <div class="bg-amber-50 p-6 rounded-3xl border border-amber-200 space-y-4">
+                        <div class="flex items-center gap-3">
+                            <i class="fa-solid fa-music text-3xl text-oaxaca-gold"></i>
+                            <h4 class="font-serif text-xl font-bold text-slate-800">Himno Sentimental</h4>
+                        </div>
+                        <p class="text-xs sm:text-sm text-slate-700 italic leading-relaxed">
+                            "Mi querido Reforma, rinconcito de la Mixteca..." — Composición emblemática del recordado músico Don Diógenes Molina.
+                        </p>
+                        <div class="p-3 bg-white rounded-xl border border-amber-200 text-xs text-slate-600">
+                            <strong>Géneros ejecutados:</strong> Chilenas alegres, sones de costumbre, pasos dobles y jarabes mixtecos.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CONTENIDO DE TAB 3: GASTRONOMÍA E INDUMENTARIA -->
+            <div id="tab-comida" class="tab-content hidden bg-white p-8 sm:p-12 rounded-3xl shadow-xl border border-slate-200 space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Gastronomía -->
+                    <div class="space-y-4">
+                        <h3 class="font-serif text-2xl font-bold text-slate-800 flex items-center gap-2">
+                            <i class="fa-solid fa-drumstick-bite text-oaxaca-cempasuchil"></i> Sazores de la Sierra Sur
+                        </h3>
+                        <ul class="text-xs sm:text-sm text-slate-600 space-y-2">
+                            <li class="bg-slate-50 p-3 rounded-xl border border-slate-200"><strong>Platillos Principales:</strong> Mole negro y rojo con guajolote criollo, adobo de cerdo, barbacoa de res o chivo en horno de tierra, pozole y chilate de pollo.</li>
+                            <li class="bg-slate-50 p-3 rounded-xl border border-slate-200"><strong>Bebidas e Insumos:</strong> Chilate de cacao, atole de arroz, tamales envueltos en hoja de plátano, pan de yema y café artesanal de altura.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Indumentaria -->
+                    <div class="space-y-4">
+                        <h3 class="font-serif text-2xl font-bold text-slate-800 flex items-center gap-2">
+                            <i class="fa-solid fa-shirt text-oaxaca-turquesa"></i> Vestimenta Tradicional
+                        </h3>
+                        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                            Las mujeres portan enaguas coloridas y huipiles con bordados autóctonos mixtecos e influencias triquis que plasman flores y animales de la región. Los hombres mayores conservan la vestimenta de calzón y camisa de manta con sombrero de palma tejida a mano.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 5: CALENDARIO INTERACTIVO DE FESTIVIDADES -->
+    <section id="festividades" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <span class="text-oaxaca-gold text-xs font-bold uppercase tracking-widest bg-amber-100 px-4 py-1.5 rounded-full border border-amber-200">
+                Fechas Especiales
+            </span>
+            <h2 class="font-serif text-3xl sm:text-5xl font-bold text-slate-900 mt-3">
+                Calendario Festivo y Religioso
+            </h2>
+            <p class="text-slate-600 max-w-2xl mx-auto mt-3 text-sm sm:text-base">
+                Festejos patronales, ritos ancestrales y ferias en la cabecera y agencias.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- 6 de Enero -->
+            <div class="bg-white p-6 rounded-3xl shadow-md border-t-4 border-oaxaca-gold hover:shadow-xl transition space-y-3">
+                <div class="text-xs font-bold text-oaxaca-gold uppercase tracking-wider">6 de Enero</div>
+                <h3 class="font-serif text-xl font-bold text-slate-800">Santos Reyes Magos</h3>
+                <p class="text-xs text-slate-600">Celebración patronal emblemática en la Colonia Tres Reyes con misas, jaripeo y baile popular.</p>
+            </div>
+
+            <!-- 1 al 15 de Mayo -->
+            <div class="bg-white p-6 rounded-3xl shadow-md border-t-4 border-oaxaca-cochinilla hover:shadow-xl transition space-y-3">
+                <div class="text-xs font-bold text-oaxaca-cochinilla uppercase tracking-wider">1 al 15 de Mayo</div>
+                <h3 class="font-serif text-xl font-bold text-slate-800">San Isidro Labrador</h3>
+                <p class="text-xs text-slate-600">Fiesta patronal de la Cabecera Municipal. Bendición de semillas, calendas, carreras de caballos y maratón.</p>
+            </div>
+
+            <!-- 15 y 16 de Septiembre -->
+            <div class="bg-white p-6 rounded-3xl shadow-md border-t-4 border-emerald-600 hover:shadow-xl transition space-y-3">
+                <div class="text-xs font-bold text-emerald-600 uppercase tracking-wider">15 y 16 de Septiembre</div>
+                <h3 class="font-serif text-xl font-bold text-slate-800">Fiestas Patrias</h3>
+                <p class="text-xs text-slate-600">Concurso tradicional de globos gigantes de papel china y danzas de la tortuga y el guajolote.</p>
+            </div>
+
+            <!-- 31 Oct al 2 de Nov -->
+            <div class="bg-white p-6 rounded-3xl shadow-md border-t-4 border-oaxaca-cempasuchil hover:shadow-xl transition space-y-3">
+                <div class="text-xs font-bold text-oaxaca-cempasuchil uppercase tracking-wider">31 Oct - 2 Nov</div>
+                <h3 class="font-serif text-xl font-bold text-slate-800">Día de Muertos (Todos Santos)</h3>
+                <p class="text-xs text-slate-600">Altares con arcos de cempasúchil, pan de yema, chocolate y el repique ritual de campanas todo el día.</p>
+            </div>
+
+            <!-- 3 de Noviembre -->
+            <div class="bg-white p-6 rounded-3xl shadow-md border-t-4 border-purple-600 hover:shadow-xl transition space-y-3">
+                <div class="text-xs font-bold text-purple-600 uppercase tracking-wider">3 de Noviembre</div>
+                <h3 class="font-serif text-xl font-bold text-slate-800">San Martín de Porres</h3>
+                <p class="text-xs text-slate-600">Festividad religiosa patronal acompañada de comparsas nocturnas y quema de castillos.</p>
+            </div>
+
+            <!-- 8 de Diciembre -->
+            <div class="bg-white p-6 rounded-3xl shadow-md border-t-4 border-blue-500 hover:shadow-xl transition space-y-3">
+                <div class="text-xs font-bold text-blue-500 uppercase tracking-wider">8 de Diciembre</div>
+                <h3 class="font-serif text-xl font-bold text-slate-800">Virgen de Juquila</h3>
+                <p class="text-xs text-slate-600">Gran fiesta en la Agencia de El Porvenir con mañanitas, antorchas y peregrinaciones.</p>
+            </div>
+
+            <!-- 12 de Diciembre -->
+            <div class="bg-white p-6 rounded-3xl shadow-md border-t-4 border-rose-600 hover:shadow-xl transition space-y-3">
+                <div class="text-xs font-bold text-rose-600 uppercase tracking-wider">12 de Diciembre</div>
+                <h3 class="font-serif text-xl font-bold text-slate-800">Virgen de Guadalupe</h3>
+                <p class="text-xs text-slate-600">Celebración llena de devoción en la Agencia de Río Tigre con música de viento y procesiones.</p>
+            </div>
+
+            <!-- 16 al 24 de Diciembre -->
+            <div class="bg-white p-6 rounded-3xl shadow-md border-t-4 border-amber-500 hover:shadow-xl transition space-y-3">
+                <div class="text-xs font-bold text-amber-500 uppercase tracking-wider">16 - 24 de Diciembre</div>
+                <h3 class="font-serif text-xl font-bold text-slate-800">Posaditas y Nochebuena</h3>
+                <p class="text-xs text-slate-600">Recorrido por los barrios, reparto de aguinaldos, atole, ponche con piquete y cenas familiares.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 6: EDUCACIÓN, SALUD Y DESARROLLO SOCIAL -->
+    <section id="desarrollo" class="py-20 bg-slate-900 text-white relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16">
+                <span class="text-amber-400 text-xs font-bold uppercase tracking-widest bg-white/10 px-4 py-1.5 rounded-full border border-white/20">
+                    Progreso Comunitario
+                </span>
+                <h2 class="font-serif text-3xl sm:text-5xl font-bold text-white mt-3">
+                    Educación, Salud y Servicios
+                </h2>
+                <p class="text-slate-300 max-w-2xl mx-auto mt-3 text-sm sm:text-base">
+                    La evolución de la infraestructura social construida con el sudor y tequio de los pobladores.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Historia Educativa -->
+                <div class="bg-white/10 backdrop-blur-md p-8 rounded-3xl border border-white/10 space-y-4">
+                    <h3 class="font-serif text-2xl font-bold text-amber-300 flex items-center gap-3">
+                        <i class="fa-solid fa-graduation-cap"></i> Desarrollo Educativo
+                    </h3>
+                    <p class="text-xs sm:text-sm text-slate-200 leading-relaxed">
+                        La educación pública germinó con la <strong>Escuela Primaria Rural Federal "Progreso"</strong> (con antecedentes desde 1927). Cabe destacar el heroico esfuerzo comunitario de 1969, cuando los ciudadanos cargaron a hombro las estructuras metálicas desde Nejapa para levantar las aulas.
+                    </p>
+                    <div class="space-y-2 text-xs text-slate-300">
+                        <div class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-400"></i> Preescolares "Gabriela Mistral" (1980) y "José Vasconcelos" (1996).</div>
+                        <div class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-400"></i> Escuela Secundaria General "Francisco I. Madero" (1980).</div>
+                        <div class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-400"></i> Telebachillerato (IEBO Módulo 88) inaugurado en el año 2000.</div>
+                    </div>
+                </div>
+
+                <!-- Historia de la Salud -->
+                <div class="bg-white/10 backdrop-blur-md p-8 rounded-3xl border border-white/10 space-y-4">
+                    <h3 class="font-serif text-2xl font-bold text-amber-300 flex items-center gap-3">
+                        <i class="fa-solid fa-kit-medical"></i> Salud y Parteras Tradicionales
+                    </h3>
+                    <p class="text-xs sm:text-sm text-slate-200 leading-relaxed">
+                        Durante décadas, la salud descansó en la sabiduría de las parteras tradicionales y curanderos (como Tía Gachita, Doña Beatriz Medel y Don Cecilio de El Chorro). Para emergencias graves se dependía de la mítica pista de aviación para traslados a Ometepec u Oaxaca.
+                    </p>
+                    <div class="space-y-2 text-xs text-slate-300">
+                        <div class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-400"></i> Unidad Médica Rural (IMSS-Bienestar) en la Cabecera Municipal.</div>
+                        <div class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-400"></i> Casas y Centros de Salud de los Servicios de Salud de Oaxaca (SSO).</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PIE DE PÁGINA (FOOTER) CON DECORADO MIXTECO -->
+    <footer class="bg-black text-slate-400 py-12 text-xs border-t border-slate-800 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 text-center">
+            <div class="flex justify-center items-center space-x-3">
+                <div class="w-8 h-8 rounded-full bg-oaxaca-gold text-slate-950 font-bold flex items-center justify-center text-sm">
+                    LR
+                </div>
+                <span class="font-serif text-base text-white font-bold">Municipio de La Reforma, Putla, Oaxaca</span>
+            </div>
+            
+            <p class="max-w-xl mx-auto text-slate-500 leading-relaxed">
+                Portal Informativo Comunitario desarrollado en reconocimiento a la historia, los códices mixtecos y la memoria viva de los abuelos de La Reforma.
+            </p>
+
+            <div class="grecas-border my-6 opacity-30"></div>
+
+            <p class="text-slate-600">
+                &copy; 2026 Honorable Ayuntamiento Constitucional de La Reforma. Todos los derechos reservados.
+            </p>
+        </div>
+    </footer>
+
+    <!-- MODALES DE HISTORIA Y DETALLES DE COMUNIDADES -->
+    <!-- Modal Estanzuela -->
+    <div id="modal-estanzuela" class="fixed inset-0 bg-slate-900/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white max-w-lg w-full rounded-3xl p-6 sm:p-8 space-y-4 shadow-2xl relative">
+            <button onclick="closeModal('modal-estanzuela')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700 text-xl"><i class="fa-solid fa-xmark"></i></button>
+            <span class="text-xs font-bold text-rose-700 uppercase">Agencia Municipal</span>
+            <h3 class="font-serif text-2xl font-bold text-slate-900">Estanzuela Grande</h3>
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                Asentamiento prehispánico mixteco. En la época colonial formó parte del predio de la antigua hacienda <em>"La Esperanza"</em>. Cuenta con una fuerte tradición de comercio comunal con su afamado **Día de Plaza** y la fiesta en honor a San José instituida desde antes de 1800.
+            </p>
+            <button onclick="closeModal('modal-estanzuela')" class="w-full bg-oaxaca-cochinilla text-white font-semibold py-2.5 rounded-xl text-xs">Cerrar</button>
+        </div>
+    </div>
+
+    <!-- Modal Porvenir -->
+    <div id="modal-porvenir" class="fixed inset-0 bg-slate-900/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white max-w-lg w-full rounded-3xl p-6 sm:p-8 space-y-4 shadow-2xl relative">
+            <button onclick="closeModal('modal-porvenir')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700 text-xl"><i class="fa-solid fa-xmark"></i></button>
+            <span class="text-xs font-bold text-amber-700 uppercase">Agencia de Policía</span>
+            <h3 class="font-serif text-2xl font-bold text-slate-900">El Porvenir</h3>
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                Antiguamente nombrado <em>La Campana</em> debido a la forma de sus cerros adyacentes. Tras ser destruido por fenómenos climáticos, fue reubicado en su emplazamiento actual en 1945. Sus habitantes producen café orgánico de alta calidad y miel, celebrando el 8 de diciembre a la Virgen de Juquila.
+            </p>
+            <button onclick="closeModal('modal-porvenir')" class="w-full bg-oaxaca-cochinilla text-white font-semibold py-2.5 rounded-xl text-xs">Cerrar</button>
+        </div>
+    </div>
+
+    <!-- Modal Río Tigre -->
+    <div id="modal-riotigre" class="fixed inset-0 bg-slate-900/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white max-w-lg w-full rounded-3xl p-6 sm:p-8 space-y-4 shadow-2xl relative">
+            <button onclick="closeModal('modal-riotigre')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700 text-xl"><i class="fa-solid fa-xmark"></i></button>
+            <span class="text-xs font-bold text-amber-700 uppercase">Agencia de Policía</span>
+            <h3 class="font-serif text-2xl font-bold text-slate-900">Río Tigre</h3>
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                Localizado dentro de los terrenos ejidales de Estanzuela. Su nombre surgió por la leyenda de una enorme piedra situada en el lecho del río que conserva una marca idéntica a la garra de un tigre (jaguar). Celebración el 12 de diciembre.
+            </p>
+            <button onclick="closeModal('modal-riotigre')" class="w-full bg-oaxaca-cochinilla text-white font-semibold py-2.5 rounded-xl text-xs">Cerrar</button>
+        </div>
+    </div>
+
+    <!-- Modal La Nueva Esperanza -->
+    <div id="modal-esperanza" class="fixed inset-0 bg-slate-900/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white max-w-lg w-full rounded-3xl p-6 sm:p-8 space-y-4 shadow-2xl relative">
+            <button onclick="closeModal('modal-esperanza')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700 text-xl"><i class="fa-solid fa-xmark"></i></button>
+            <span class="text-xs font-bold text-emerald-700 uppercase">Núcleo Rural</span>
+            <h3 class="font-serif text-2xl font-bold text-slate-900">La Nueva Esperanza</h3>
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                Antiguamente denominado <em>El Chorro</em> en alusión a sus vertientes naturales y caídas de agua. Comunidad caracterizada por el esfuerzo coordinado de productores de café para combatir plagas como la roya.
+            </p>
+            <button onclick="closeModal('modal-esperanza')" class="w-full bg-oaxaca-cochinilla text-white font-semibold py-2.5 rounded-xl text-xs">Cerrar</button>
+        </div>
+    </div>
+
+    <!-- Modal Tres Reyes -->
+    <div id="modal-tresreyes" class="fixed inset-0 bg-slate-900/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white max-w-lg w-full rounded-3xl p-6 sm:p-8 space-y-4 shadow-2xl relative">
+            <button onclick="closeModal('modal-tresreyes')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700 text-xl"><i class="fa-solid fa-xmark"></i></button>
+            <span class="text-xs font-bold text-blue-700 uppercase">Colonia Histórica</span>
+            <h3 class="font-serif text-2xl font-bold text-slate-900">Tres Reyes</h3>
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                Lugar de gran relevancia logística en los años 50 al hospedar la pista de aterrizaje donde descendían las avionetas de la ruta de la Costa. Cada 6 de enero celebran la festividad de los Reyes Magos.
+            </p>
+            <button onclick="closeModal('modal-tresreyes')" class="w-full bg-oaxaca-cochinilla text-white font-semibold py-2.5 rounded-xl text-xs">Cerrar</button>
+        </div>
+    </div>
+
+    <!-- Modal Emiliano Zapata -->
+    <div id="modal-zapata" class="fixed inset-0 bg-slate-900/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white max-w-lg w-full rounded-3xl p-6 sm:p-8 space-y-4 shadow-2xl relative">
+            <button onclick="closeModal('modal-zapata')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700 text-xl"><i class="fa-solid fa-xmark"></i></button>
+            <span class="text-xs font-bold text-purple-700 uppercase">Barrio Tradicional</span>
+            <h3 class="font-serif text-2xl font-bold text-slate-900">Emiliano Zapata</h3>
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                Anteriormente conocido como <em>Río Leche Chiquito</em>. En sus inmediaciones operó el afamado trapiche de Don Melquiades Pérez Pacheco para elaborar panela artesanal y el curado "La Fábrica". Posee la capilla de la Virgen de la Candelaria.
+            </p>
+            <button onclick="closeModal('modal-zapata')" class="w-full bg-oaxaca-cochinilla text-white font-semibold py-2.5 rounded-xl text-xs">Cerrar</button>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT INTERACTIVO -->
+    <script>
+        // Toggle Menú Móvil
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Cambio de Tabs en Cultura
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('bg-oaxaca-cochinilla', 'text-white');
+                btn.classList.add('bg-white', 'text-slate-700');
+            });
+
+            document.getElementById(tabId).classList.remove('hidden');
+            const activeBtn = document.getElementById('btn-' + tabId);
+            activeBtn.classList.remove('bg-white', 'text-slate-700');
+            activeBtn.classList.add('bg-oaxaca-cochinilla', 'text-white');
+        }
+
+        // Búsqueda interactiva de comunidades
+        const searchInput = document.getElementById('community-search');
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+            const cards = document.querySelectorAll('.community-card');
+
+            cards.forEach(card => {
+                const text = card.textContent.toLowerCase();
+                if (text.includes(query)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+
+        // Funciones para Modales
+        function openModal(id) {
+            document.getElementById(id).classList.remove('hidden');
+        }
+        function closeModal(id) {
+            document.getElementById(id).classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
